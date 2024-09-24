@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class BaseballGameGUI extends JFrame {
     private final JTextArea resultArea;
-    private final BaseballGameMain gameMain;
+    private final BaseballGameMain gameLevel;
     private final StringBuilder userInput;
 
-    public BaseballGameGUI(BaseballGameMain gameMain) {
-        this.gameMain = gameMain;
+    public BaseballGameGUI(BaseballGameMain gameLevel) {
+        this.gameLevel = gameLevel;
         this.userInput = new StringBuilder();
 
         setTitle("숫자 야구 게임");
@@ -90,31 +90,30 @@ public class BaseballGameGUI extends JFrame {
         String[] options = {"레벨 1 (3자리)", "레벨 2 (4자리)", "레벨 3 (5자리)"};
         int choice = JOptionPane.showOptionDialog(this, "난이도를 선택하세요:", "난이도 설정",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-
         if (choice != -1) {
-            gameMain.setDifficulty(choice + 1);  // 난이도 설정
+            gameLevel.setDifficulty(choice + 1);  // 난이도 설정
             appendResult("난이도가 레벨 " + (choice + 1) + "로 설정되었습니다.\n");
         }
     }
 
     private void handleNumberButton(int number) {
-        if (userInput.length() < gameMain.getNumberOfDigits() && userInput.indexOf(String.valueOf(number)) == -1) {
+        if (userInput.length() < gameLevel.getNumberOfDigits() && userInput.indexOf(String.valueOf(number)) == -1) {
             userInput.append(number);
             updateUserInputDisplay();
         } else {
-            appendResult("중복된 숫자는 입력할 수 없거나 " + gameMain.getNumberOfDigits() + "개의 숫자만 입력 가능합니다.\n");
+            appendResult("중복된 숫자는 입력할 수 없거나 " + gameLevel.getNumberOfDigits() + "개의 숫자만 입력 가능합니다.\n");
         }
     }
 
     private void handleSubmit() {
-        if (userInput.length() == gameMain.getNumberOfDigits()) { // 자리수에 맞춰 입력
+        if (userInput.length() == gameLevel.getNumberOfDigits()) { // 자리수에 맞춰 입력
             int[] userNumbers = userInput.toString().chars().map(Character::getNumericValue).toArray();
-            String result = gameMain.checkResult(userNumbers);
+            String result = gameLevel.checkResult(userNumbers);
             appendResult(result + "\n");
             userInput.setLength(0); // 입력 초기화
             updateUserInputDisplay();
         } else {
-            appendResult("숫자 " + gameMain.getNumberOfDigits() + "개를 입력하세요.\n");
+            appendResult("숫자 " + gameLevel.getNumberOfDigits() + "개를 입력하세요.\n");
         }
     }
 
@@ -126,7 +125,7 @@ public class BaseballGameGUI extends JFrame {
     }
 
     private void handleRestart() {
-        gameMain.resetGame();
+        gameLevel.resetGame();
         appendResult("게임이 다시 시작되었습니다.\n");
         userInput.setLength(0);
         updateUserInputDisplay();
@@ -139,11 +138,11 @@ public class BaseballGameGUI extends JFrame {
     }
 
     private void handleScore() {
-        appendResult(gameMain.getFormattedScores());
+        appendResult(gameLevel.getFormattedScores());
     }
 
     private void handleClearScore() {
-        gameMain.clearScoreList();
+        gameLevel.clearScoreList();
         appendResult("점수 리스트가 초기화되었습니다.\n");
     }
 
