@@ -22,6 +22,7 @@ ERD 대신 UML 클래스 다이어그램에 가깝게 표현할 수 있습니다
     -   **BaseballMain → BaseballInput**: BaseballMain이 BaseballInput의 메서드인 `validateInput()`을 호출하여 입력을 검증합니다. (1:1 관계)
     -   **BaseballMain → BaseballScoreManager**: BaseballMain이 점수를 관리할 때 BaseballScoreManager를 사용합니다. (1:1 관계)
     -   **BaseballMain → BaseballAnswer**: BaseballMain이 정답을 생성하고 관리하기 위해 BaseballAnswer를 사용합니다. (1:1 관계)
+![야구게임_ERD_다이어그램_CLI](https://github.com/user-attachments/assets/6b905aaf-c3df-404a-98dd-2a0bc1a925d1)
 
 ## 2\. GUI 버전
 
@@ -118,3 +119,4 @@ ERD 대신 UML 클래스 다이어그램에 가깝게 표현할 수 있습니다
 -   `BaseballGameMain`은 `BaseballGameLogic`을 초기화하고 관리합니다.
 -   `BaseballGameLogic`은 핵심 게임 로직을 관리하며, `BaseballGameScoreManager`를 통해 점수를 기록하고 `BaseballGameRandomNum`을 통해 난수를 생성합니다.
 -   `BaseballGameGUI`는 사용자 인터페이스를 담당하며 `BaseballGameMain`과 상호작용하여 게임 로직을 실행합니다.
+![야구게임_ERD_다이어그램_GUI](https://github.com/user-attachments/assets/91429e84-8d44-46d7-981c-0b88ce38a7ab)
